@@ -76,7 +76,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Gunther)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(mazamorac)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -137,7 +137,9 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Malyan M150"
+//Config MAZ
+//#define CUSTOM_MACHINE_NAME "Malyan M150"
+#define CUSTOM_MACHINE_NAME "MP Maker Select V1"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -417,8 +419,9 @@
  *         Use these for Testing or Development purposes. NEVER for production machine.
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
+ *   9999: Monoprice Maker Select V1 hot end and bed thermistor with all original hardware (Melzi board, etc)
  */
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 99
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -429,7 +432,7 @@
 
 // For Malyan M150, some discussions around changing the TEMP_SENSOR_BED from 1 to 3 on a french discussion board.
 // The reasons are inconclusive so I leave at 1
-#define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_BED 666
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 
@@ -498,10 +501,10 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // Malyan M150 example
-  #define DEFAULT_Kp 29
-  #define DEFAULT_Ki 2
-  #define DEFAULT_Kd 97
+  // Stock Monoprice Maker Select PID values
+  #define DEFAULT_Kp 16.58
+  #define DEFAULT_Ki 0.73
+  #define DEFAULT_Kd 94.06
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
@@ -532,7 +535,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -550,9 +553,14 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  // #define DEFAULT_bedKp 10.00
+  // #define DEFAULT_bedKi .023
+  // #define DEFAULT_bedKd 305.4
+
+  // Stock Monoprice Maker Select PID values
+  #define DEFAULT_bedKp 445.90
+  #define DEFAULT_bedKi 86.38
+  #define DEFAULT_bedKd 1534.47
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -750,8 +758,9 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-                                      // Standard M150 17T MXL on X and Y
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 3200/34.544, 3200/34.544, 1600, 103.00 }
+
+// Stock Monoprice Maker Select v1
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 407.6, 88.00 }
 
 // Other common M150 values:
 // 16T MXL on X and Y
@@ -1000,10 +1009,10 @@
 //#define XY_PROBE_SPEED 8000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-//#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-//#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 
 /**
  * Multiple Probing
@@ -1032,15 +1041,15 @@
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
 //#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
-//#define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
+#define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-//#define Z_PROBE_OFFSET_RANGE_MIN -20
-//#define Z_PROBE_OFFSET_RANGE_MAX 20
+#define Z_PROBE_OFFSET_RANGE_MIN -20
+#define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
 //#define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -1092,7 +1101,7 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR false
-#define INVERT_Z_DIR false
+#define INVERT_Z_DIR true
 
 // @section extruder
 
