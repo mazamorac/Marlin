@@ -468,7 +468,8 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
+// Setting at 285 for an all-metal hot end
+#define HEATER_0_MAXTEMP 285
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -502,9 +503,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Stock Monoprice Maker Select PID values
-  #define DEFAULT_Kp 16.58
-  #define DEFAULT_Ki 0.73
-  #define DEFAULT_Kd 94.06
+  #define DEFAULT_Kp 25
+  #define DEFAULT_Ki 0.90
+  #define DEFAULT_Kd 60.62
 
   // MakerGear
   //#define DEFAULT_Kp 7.0
